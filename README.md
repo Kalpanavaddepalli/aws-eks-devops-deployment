@@ -17,7 +17,7 @@ As an additional implementation, a GitOps-based deployment approach using GitHub
 
 ---
 
-# ✅ Challenge Requirements Mapping
+# ✅ Implementation Overview
 
 | Requirement | Implementation |
 |------------|----------------|
