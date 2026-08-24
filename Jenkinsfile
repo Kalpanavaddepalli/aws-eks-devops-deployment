@@ -31,27 +31,33 @@ pipeline {
         stage('Login to ECR') {
             steps {
                 sh '''
+                AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+
                 aws ecr get-login-password --region $AWS_REGION | \
-                docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
+                docker login --username AWS --password-stdin \
+                ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
                 '''
             }
         }
 
-        stage('Tag Image') {
+        stage('Tag and Push Image') {
             steps {
-                sh "docker tag my-app:latest ${ECR_URI}:${IMAGE_TAG}"
-            }
-        }
+                sh '''
+                AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+                ECR_URI=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPO}
 
-        stage('Push to ECR') {
-            steps {
-                sh "docker push ${ECR_URI}:${IMAGE_TAG}"
+                docker tag my-app:latest ${ECR_URI}:${IMAGE_TAG}
+                docker push ${ECR_URI}:${IMAGE_TAG}
+                '''
             }
         }
 
         stage('Deploy to EKS') {
             steps {
                 sh '''
+                AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+                ECR_URI=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPO}
+
                 aws eks update-kubeconfig \
                     --region $AWS_REGION \
                     --name hello-eks-cluster
