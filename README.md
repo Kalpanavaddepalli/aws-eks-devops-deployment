@@ -236,7 +236,7 @@ kubectl get hpa
 
 # 🌐 Application Exposure with ALB
 
-AWS Load Balancer Controller is used to expose the application externally.
+AWS Load Balancer Controller provisions an internet-facing ALB that routes traffic through the Kubernetes Ingress to the ClusterIP service and application pods.
 
 Verify:
 
