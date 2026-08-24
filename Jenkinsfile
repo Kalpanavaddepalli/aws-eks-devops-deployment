@@ -3,10 +3,8 @@ pipeline {
 
     environment {
         AWS_REGION = "us-east-1"
-        AWS_ACCOUNT_ID = "308324916327"
         ECR_REPO = "hello-world-app"
         IMAGE_TAG = "latest"
-        ECR_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPO}"
     }
 
     stages {
@@ -58,9 +56,11 @@ pipeline {
                     --region $AWS_REGION \
                     --name hello-eks-cluster
 
-                kubectl apply -f k8s/
+                helm upgrade --install hello-app ./helm-chart/hello-app \
+                    --set image.repository=$ECR_URI \
+                    --set image.tag=$IMAGE_TAG
 
-                kubectl rollout status deployment/hello-app || true
+                kubectl rollout status deployment/hello-app
                 '''
             }
         }
