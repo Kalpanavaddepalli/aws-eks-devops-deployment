@@ -66,7 +66,7 @@ pipeline {
                     --set image.repository=$ECR_URI \
                     --set image.tag=$IMAGE_TAG
 
-                kubectl rollout status deployment/hello-app-deployment
+                kubectl rollout status deployment/hello-app-deployment --timeout=180s
                 '''
             }
         }
