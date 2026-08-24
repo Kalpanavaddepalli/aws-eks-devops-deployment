@@ -18,7 +18,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/Kalpanavaddepalli/devops-code-challenge2.git'
+                    url: 'https://github.com/Kalpanavaddepalli/aws-eks-devops-deployment.git'
             }
         }
 
@@ -60,7 +60,7 @@ pipeline {
                     --set image.repository=$ECR_URI \
                     --set image.tag=$IMAGE_TAG
 
-                kubectl rollout status deployment/hello-app
+                kubectl rollout status deployment/hello-app-deployment
                 '''
             }
         }
