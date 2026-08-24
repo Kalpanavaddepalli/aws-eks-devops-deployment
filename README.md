@@ -1,4 +1,4 @@
-# 📘 Tech Challenge 2 — Application Deployment with Docker, EKS & Jenkins CI/CD
+# 📘 AWS EKS Application Deployment with Terraform & CI/CD
 
 ## 🚀 Project Overview
 
@@ -222,10 +222,9 @@ The application automatically scales based on resource usage.
 
 Configuration:
 
-- CPU Utilization: 50%
-- Memory Utilization: 50%
-- Minimum Pods: 1
-- Maximum Pods: 6
+- CPU Utilization: 70%
+- Minimum Pods: 2
+- Maximum Pods: 5
 
 Verify:
 
@@ -405,7 +404,7 @@ Required AWS IAM Roles:
 
 **Kalpana Vaddepalli**
 
-Tech Challenge 2 – AWS DevOps Engineering Project
+AWS EKS & DevOps Engineering Project
 
 Technologies: AWS • Docker • Terraform • Kubernetes • EKS • Helm • Jenkins • ECR • GitHub Actions • Argo CD
 
