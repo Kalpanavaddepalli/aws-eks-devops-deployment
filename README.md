@@ -84,7 +84,7 @@ End User
 # 📂 Project Structure
 
 ```text
-devops-code-challenge2/
+aws-eks-devops-deployment/
 │
 ├── app/
 │   ├── app.py
